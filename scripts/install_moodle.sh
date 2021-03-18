@@ -195,6 +195,7 @@ set -ex
     # Moodle requirements
     sudo apt-get -y update > /dev/null
     sudo apt-get install -y --force-yes graphviz aspell php$phpVersion-common php$phpVersion-soap php$phpVersion-json php$phpVersion-redis > /tmp/apt6.log
+    sudo apt-get install -y language-pack-zh-hant language-pack-en ghostscript >> /tmp/apt6.log
     sudo apt-get install -y --force-yes php$phpVersion-bcmath php$phpVersion-gd php$phpVersion-xmlrpc php$phpVersion-intl php$phpVersion-xml php$phpVersion-bz2 php-pear php$phpVersion-mbstring php$phpVersion-dev mcrypt >> /tmp/apt6.log
     PhpVer=$(get_php_version)
     if [ $dbServerType = "mysql" ]; then
@@ -476,6 +477,7 @@ EOF
    sed -i "s/;opcache.enable.*/opcache.enable = 1/" $PhpIni
    sed -i "s/;opcache.memory_consumption.*/opcache.memory_consumption = 256/" $PhpIni
    sed -i "s/;opcache.max_accelerated_files.*/opcache.max_accelerated_files = 8000/" $PhpIni
+   sed -i "s/;date.timezone.*/date.timezone = Asia\/Taipei/" $PhpIni
 
    # fpm config - overload this 
    cat <<EOF > /etc/php/${PhpVer}/fpm/pool.d/www.conf
