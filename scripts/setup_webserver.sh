@@ -95,6 +95,7 @@ check_fileServerType_param $fileServerType
     php$phpVersion-dev \
     graphviz \
     aspell \
+    language-pack-zh-hant language-pack-en ghostscript \
     php$phpVersion-soap \
     php$phpVersion-json \
     php$phpVersion-redis \
@@ -482,7 +483,8 @@ EOF
    sed -i "s/;opcache.enable.*/opcache.enable = 1/" $PhpIni
    sed -i "s/;opcache.memory_consumption.*/opcache.memory_consumption = 512/" $PhpIni
    sed -i "s/;opcache.max_accelerated_files.*/opcache.max_accelerated_files = 20000/" $PhpIni
-    
+   sed -i "s/;date.timezone.*/date.timezone = Asia\/Taipei/" $PhpIni
+   
    # Remove the default site. Moodle is the only site we want
    rm -f /etc/nginx/sites-enabled/default
    if [ "$webServerType" = "apache" ]; then
